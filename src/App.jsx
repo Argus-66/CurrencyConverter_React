@@ -17,8 +17,14 @@ function App() {
   const swap = () => {
     setFrom(to)
     setTo(from)
-    setConvertedAmount(amount)
-    setAmount(convertedAmount)
+    //setConvertedAmount(amount)
+
+    // Temporarily store the current amount
+    const tempAmount = amount;
+    // Update the amount to reflect the swapped conversion
+    setAmount(convertedAmount);
+    // Recalculate the converted amount with the swapped currencies
+    setConvertedAmount(tempAmount);
   }
 
   const convert = () =>{
@@ -47,8 +53,9 @@ function App() {
                             label="From"
                             amount={amount}
                             currencyOptions={options}
-                            onCurrencyChange={(currency) => setAmount(amount)}
+                            onCurrencyChange={(currency) => setFrom(currency)}   //changed
                             selectCurrency={from}
+                            onAmountChange={(amount) => setAmount(amount)  }
                             
                         />
                     </div>
@@ -66,8 +73,8 @@ function App() {
                             label="To"
                             amount={convertedAmount}
                             currencyOptions={options}
-                            onCurrencyChange={(currency) => setTo(currency)}
-                            selectCurrency={from}
+                            onCurrencyChange={(currency) => setTo(currency)} //changed
+                            selectCurrency={to}
                             amountDisable
                         />
                     </div>
